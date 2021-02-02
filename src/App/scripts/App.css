@@ -1,0 +1,35 @@
+.site-layout-content {
+  min-height: 280px;
+  /* padding: 10px; */
+  background: #fff;
+}
+
+#components-layout-demo-responsive .logo {
+  float: left;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.site-layout-sub-header-background {
+  background: #fff;
+}
+
+.site-layout-background {
+  background: #fff;
+}
+/* #components-layout-demo-top .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
+}
+.ant-row-rtl #components-layout-demo-top .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+} */
+
+.site-content {
+  padding: 0 10px;
+}
