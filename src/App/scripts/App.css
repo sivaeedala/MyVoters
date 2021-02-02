@@ -18,6 +18,11 @@
 .site-layout-background {
   background: #fff;
 }
+
+.mycontent .border {
+  border-bottom: 1px solid black;
+  padding: 10px 0px 10px;
+}
 /* #components-layout-demo-top .logo {
   float: left;
   width: 120px;

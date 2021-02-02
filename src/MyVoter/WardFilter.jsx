@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import { Select } from "antd";
 import { Option } from "antd/lib/mentions";
 
-export default function WardFilter({ handleWardFilter }) {
+export default function WardFilter({ handleWardFilter, reset }) {
   const { Option } = Select;
   const handleValueChange = (value) => {
     setSelectWard(value);
@@ -11,6 +11,9 @@ export default function WardFilter({ handleWardFilter }) {
     // alert(value);
   };
   const [selectWard, setSelectWard] = useState("All");
+  useEffect(() => {
+    setSelectWard("All");
+  }, [reset]);
   return (
     <div>
       <Row className="align-items-center">

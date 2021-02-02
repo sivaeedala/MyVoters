@@ -6,8 +6,16 @@ import AppContent from "./AppContent";
 function App() {
   return (
     <Container>
-      <AppNav />
-      <AppContent></AppContent>
+      <div className="row">
+        <div className="col">
+          <AppNav />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <AppContent></AppContent>
+        </div>
+      </div>
     </Container>
   );
 }
