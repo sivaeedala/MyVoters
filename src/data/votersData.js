@@ -1,4 +1,4 @@
-[
+export const votersData =[
   {
     Sno: "1",
     VoteId: "1",
