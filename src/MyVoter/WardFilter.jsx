@@ -12,7 +12,9 @@ export default function WardFilter({ handleWardFilter, reset }) {
   };
   const [selectWard, setSelectWard] = useState("All");
   useEffect(() => {
-    setSelectWard("All");
+    if (reset) {
+      setSelectWard("All");
+    }
   }, [reset]);
   return (
     <div>

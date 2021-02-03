@@ -7,7 +7,7 @@ import WardFilter from "../MyVoter/WardFilter";
 
 export default function AppContent() {
   const [filterData, setFilterData] = useState(votersData);
-  const[resetAll, setResetAll] = useState(false);
+  const [resetAll, setResetAll] = useState(false);
   const [casteCount, setCasteCount] = useState({
     oc: 0,
     bc: 0,
@@ -64,8 +64,9 @@ export default function AppContent() {
   }, []);
 
   const handleOnSearch = (input) => {
+    setResetAll(true);
     if (input !== "") {
-      const result = filterData.filter((e) =>
+      const result = votersData.filter((e) =>
         e.Name.toLowerCase().includes(input.toLowerCase())
       );
       setFilterData(result);
@@ -77,10 +78,10 @@ export default function AppContent() {
   };
 
   const handleWardFilter = (input) => {
+    setResetAll(false);
     if (input === "All") {
       setFilterData(votersData);
       setCastNVillageCnt(votersData);
-      setResetAll(false);
     } else {
       const result = votersData.filter((e) => e.Ward === input);
       setFilterData(result);
@@ -105,7 +106,7 @@ export default function AppContent() {
       <div className="row border">
         <div className="col-8 col-xs-12">
           <AutoSearch
-            data={filterData}
+            data={votersData}
             handleOnSearch={handleOnSearch}
           ></AutoSearch>
         </div>

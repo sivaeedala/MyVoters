@@ -13,6 +13,9 @@ export default function VoterList({ voterData }) {
             <th>FatherName</th>
             <th>Village</th>
             <th>Caste</th>
+            <th>Support</th>
+            <th>Sex</th>
+            <th>Remarks</th>
           </tr>
         </thead>
         <tbody>
@@ -25,6 +28,9 @@ export default function VoterList({ voterData }) {
                 <td>{e.FatherName}</td>
                 <td>{e.Village}</td>
                 <td>{e.Caste}</td>
+                <td>{e.Support}</td>
+                <td>{e.Gender}</td>
+                <td>{e.Remarks}</td>
               </tr>
             );
           })}
