@@ -3,17 +3,18 @@ import { Row, Col, Form } from "react-bootstrap";
 import { Select } from "antd";
 import { Option } from "antd/lib/mentions";
 
-export default function WardFilter({ handleWardFilter, reset }) {
+export default function WardFilter({ handleWardFilter, reset, ward }) {
   const { Option } = Select;
   const handleValueChange = (value) => {
     setSelectWard(value);
     handleWardFilter(value);
     // alert(value);
   };
-  const [selectWard, setSelectWard] = useState("All");
+  const [selectWard, setSelectWard] = useState(ward);
+
   useEffect(() => {
     if (reset) {
-      setSelectWard("All");
+      setSelectWard(ward);
     }
   }, [reset]);
   return (
@@ -27,6 +28,7 @@ export default function WardFilter({ handleWardFilter, reset }) {
             onChange={handleValueChange}
             value={selectWard}
             // className="form-group form-control"
+            disabled={ward !== "All" ? true : false}
           >
             <Option value="All">All Wards</Option>
             <Option value="1">Ward-1</Option>
