@@ -2,6 +2,7 @@ import { LOGIN_USER, LOADING } from "./actions";
 const initialState = {
   userName: "",
   ward: "",
+  village: "",
   loading: false,
 };
 

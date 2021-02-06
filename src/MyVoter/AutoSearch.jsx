@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input, AutoComplete } from "antd";
 import { UserOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button, Row, Col } from "react-bootstrap";
@@ -7,7 +7,7 @@ function getRandomInt(max, min = 0) {
   return Math.floor(Math.random() * (max - min + 1)) + min; // eslint-disable-line no-mixed-operators
 }
 
-export const AutoSearch = ({ data, handleOnSearch, ClearSearch }) => {
+export const AutoSearch = ({ data, handleOnSearch, reset }) => {
   const [options, setOptions] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const inputResult = (value) => {
@@ -22,6 +22,10 @@ export const AutoSearch = ({ data, handleOnSearch, ClearSearch }) => {
       setOptions(result);
     }
   };
+  useEffect(() => {
+    if (reset) {
+    }
+  }, [reset]);
 
   const handleSearch = (value) => {
     if (value.length >= 3) {
@@ -54,6 +58,7 @@ export const AutoSearch = ({ data, handleOnSearch, ClearSearch }) => {
             onSearch={handleSearch}
             notFoundContent={"No Data"}
             placeholder={"Search by Name"}
+            // allowClear={true}
           >
             {options.map((Name) => (
               <Option key={Name} value={Name}>

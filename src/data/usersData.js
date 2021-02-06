@@ -1,6 +1,16 @@
 export const users = [
   {
-    Name: "leader9899",
+    Name: "kg007",
+    ward: "All",
+    village: "kothagudem",
+  },
+  {
+    Name: "gg009",
+    ward: "All",
+    village: "gollagudem",
+  },
+  {
+    Name: "leader9399",
     ward: "All",
   },
   {

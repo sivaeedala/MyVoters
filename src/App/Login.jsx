@@ -13,7 +13,11 @@ function Login({ dispatch }) {
   const checkUser = (userName) => {
     const userDtls = users.filter((e) => e.Name.toLowerCase() === userName);
     if (userDtls.length > 0) {
-      return { userName: userDtls[0].Name, ward: userDtls[0].ward };
+      return {
+        userName: userDtls[0].Name,
+        ward: userDtls[0].ward,
+        village: userDtls[0].village ? userDtls[0].village : "",
+      };
     } else {
       return "";
     }
@@ -21,7 +25,7 @@ function Login({ dispatch }) {
   const handleLogin = () => {
     const userData = checkUser(inputUser);
     if (userData !== "") {
-      dispatch(loginUser(userData.userName, userData.ward));
+      dispatch(loginUser(userData.userName, userData.ward, userData.village));
       history.push({
         pathname: "/voters",
       });

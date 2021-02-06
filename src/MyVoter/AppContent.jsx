@@ -7,19 +7,25 @@ import { votersData } from "../data/votersData";
 import WardFilter from "./WardFilter";
 import { useHistory, Link, withRouter } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
+import { Select } from "antd";
 
 function AppContent() {
+  const { Option } = Select;
   const history = useHistory();
   console.log("App useHistory()", useHistory());
-  const { userName, ward } = useSelector((state) => state);
+  const { userName, ward, village } = useSelector((state) => state);
   console.log("Siva111", userName, ward);
   const [filterData, setFilterData] = useState(votersData);
   const [resetAll, setResetAll] = useState(false);
+  const [resetSearch, setResetSearch] = useState(false);
+  const [selectVillage, setSelectVillage] = useState("All");
+  const [selectWard, setSelectWard] = useState(ward);
   const [casteCount, setCasteCount] = useState({
     oc: 0,
     bc: 0,
     scMl: 0,
     scMd: 0,
+    na: 0,
   });
   const [villageCount, setVillageCount] = useState({
     gGudem: 0,
@@ -29,6 +35,16 @@ function AppContent() {
 
   const getCasteCount = (data, input) => {
     return data.filter((e) => e.Caste === input).length;
+  };
+
+  const getNoCasteCount = (data) => {
+    return data.filter(
+      (e) =>
+        e.Caste !== "OC" &&
+        e.Caste !== "BC" &&
+        e.Caste !== "SC-ML" &&
+        e.Caste !== "SC-MD"
+    ).length;
   };
 
   const getVillageCount = (data, input) => {
@@ -41,12 +57,45 @@ function AppContent() {
     ).length;
   };
 
-  const getWardData = (input) => {
-    if (input === "All") {
-      setFilterData(votersData);
-      setCastNVillageCnt(votersData);
+  const getVotersData = (ward, village) => {
+    console.log("votersData", votersData);
+    if (village !== "" && village !== "All") {
+      //  votersData.filter(
+      //   (e) => e.Ward === ward && e.Village.toLowerCase() === village
+      // );
+      if (village === "other") {
+        let otherData = votersData.filter(
+          (e) =>
+            e.Village.toLowerCase() !== "gollagudem" &&
+            e.Village.toLowerCase() !== "kothagudem"
+        );
+       return ward === "All" ? otherData : otherData.filter((e) => e.Ward === ward);
+      } else {
+        return ward === "All"
+          ? votersData.filter((e) => e.Village.toLowerCase() === village)
+          : votersData.filter(
+              (e) => e.Ward === ward && e.Village.toLowerCase() === village
+            );
+      }
     } else {
-      const result = votersData.filter((e) => e.Ward === input);
+      return ward === "All"
+        ? votersData
+        : votersData.filter((e) => e.Ward === ward);
+    }
+  };
+
+  const getWardData = (input, village) => {
+    const data = getVotersData(input, village);
+    if (input === "All") {
+      // setFilterData(votersData);
+      // setCastNVillageCnt(votersData);
+      setFilterData(data);
+      setCastNVillageCnt(data);
+    } else {
+      // const result = votersData.filter((e) => e.Ward === input);
+      // setFilterData(result);
+      // setCastNVillageCnt(result);
+      const result = data.filter((e) => e.Ward === input);
       setFilterData(result);
       setCastNVillageCnt(result);
     }
@@ -57,12 +106,14 @@ function AppContent() {
     const bcCnt = getCasteCount(inputData, "BC");
     const scMdCnt = getCasteCount(inputData, "SC-MD");
     const scMlCnt = getCasteCount(inputData, "SC-ML");
+    const naCnt = getNoCasteCount(inputData);
     setCasteCount({
       ...casteCount,
       oc: ocCnt,
       bc: bcCnt,
       scMd: scMdCnt,
       scMl: scMlCnt,
+      na: naCnt,
     });
 
     const ggCnt = getVillageCount(inputData, "Gollagudem");
@@ -78,15 +129,23 @@ function AppContent() {
   };
 
   useEffect(() => {
+    if (village) {
+      setSelectVillage(village === "" ? "All" : village);
+    } else {
+      setSelectVillage("All");
+    }
     // setCastNVillageCnt(votersData);
-    getWardData(ward);
+    getWardData(ward, village);
   }, []);
 
   const handleOnSearch = (input) => {
-    setResetAll(true);
-    let x = votersData;
-    const searchData =
-      ward === "All" ? votersData : votersData.filter((e) => e.Ward === ward);
+    // setResetAll(true);
+    setSelectWard(ward);
+    setResetSearch(false);
+    // const searchData =
+    //   ward === "All" ? votersData : votersData.filter((e) => e.Ward === ward);
+    // const searchData = getVotersData(ward, village);
+    const searchData = getVotersData(ward, selectVillage);
     if (input !== "") {
       const result = searchData.filter((e) =>
         e.Name.toLowerCase().includes(input.toLowerCase())
@@ -98,17 +157,35 @@ function AppContent() {
       setCastNVillageCnt(searchData);
     }
   };
+  const handleVillageSelect = (value) => {
+    setSelectVillage(value);
+    getWardData(selectWard, value);
+
+    // if (value === "All") {
+    //   getWardData(selectWard, value);
+    // } else {
+    //   getWardData(selectWard, value);
+    // }
+  };
 
   const handleWardFilter = (input) => {
     setResetAll(false);
-    getWardData(input);
+    setResetSearch(true);
+    setSelectVillage(village === "" ? "All" : village);
+    // getWardData(input);
+    getWardData(input, selectVillage);
   };
   const ClearSearch = () => {
-    const vData =
-      ward === "All" ? votersData : votersData.filter((e) => e.Ward === ward);
+    // const vData =
+    //   ward === "All" ? votersData : votersData.filter((e) => e.Ward === ward);
+    const vData = getVotersData(ward, village);
+
     setFilterData(vData);
+    setResetSearch(true);
     setCastNVillageCnt(vData);
     setResetAll(true);
+    setSelectVillage(village === "" ? "All" : village);
+    setSelectWard(ward);
   };
   return (
     <div className="mycontent">
@@ -119,8 +196,30 @@ function AppContent() {
               <WardFilter
                 handleWardFilter={handleWardFilter}
                 reset={resetAll}
-                ward={ward}
+                // ward={ward}
+                isDisable={ward !== "All" ? true : false}
+                selectWard={selectWard}
+                setSelectWard={setSelectWard}
               ></WardFilter>
+            </div>
+          </div>
+
+          <div className="row border">
+            <div className="col-12 col-xs-12">
+              <Select
+                style={{ width: 250 }}
+                placeholder="Select a Village"
+                optionFilterProp="children"
+                onChange={handleVillageSelect}
+                value={selectVillage}
+                // className="form-group form-control"
+                disabled={village !== "" && village !== "All" ? true : false}
+              >
+                <Option value="All">All Villages</Option>
+                <Option value="gollagudem">Gollagudem</Option>
+                <Option value="kothagudem">kothagudem</Option>
+                <Option value="other">other</Option>
+              </Select>
             </div>
           </div>
           <div className="row border">
@@ -132,6 +231,7 @@ function AppContent() {
                     : votersData.filter((e) => e.Ward === ward)
                 }
                 handleOnSearch={handleOnSearch}
+                reset={resetSearch}
               ></AutoSearch>
             </div>
             <div className="col-4 col-xs-12">
@@ -163,6 +263,9 @@ function AppContent() {
             </div>
             <div class="col">
               <Badge variant="dark">{`SC-MD-${casteCount.scMd}`}</Badge>
+            </div>
+            <div class="col">
+              <Badge variant="secondary">{`NA-${casteCount.na}`}</Badge>
             </div>
           </div>
           <div className="row">
