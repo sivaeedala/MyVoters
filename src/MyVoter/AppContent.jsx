@@ -12,9 +12,9 @@ import { Select } from "antd";
 function AppContent() {
   const { Option } = Select;
   const history = useHistory();
-  console.log("App useHistory()", useHistory());
+  // console.log("App useHistory()", useHistory());
   const { userName, ward, village } = useSelector((state) => state);
-  console.log("Siva111", userName, ward);
+  // console.log("Siva111", userName, ward);
   const [filterData, setFilterData] = useState(votersData);
   const [resetAll, setResetAll] = useState(false);
   const [resetSearch, setResetSearch] = useState(false);
@@ -58,7 +58,7 @@ function AppContent() {
   };
 
   const getVotersData = (ward, village) => {
-    console.log("votersData", votersData);
+    // console.log("votersData", votersData);
     if (village !== "" && village !== "All") {
       //  votersData.filter(
       //   (e) => e.Ward === ward && e.Village.toLowerCase() === village
@@ -69,7 +69,9 @@ function AppContent() {
             e.Village.toLowerCase() !== "gollagudem" &&
             e.Village.toLowerCase() !== "kothagudem"
         );
-       return ward === "All" ? otherData : otherData.filter((e) => e.Ward === ward);
+        return ward === "All"
+          ? otherData
+          : otherData.filter((e) => e.Ward === ward);
       } else {
         return ward === "All"
           ? votersData.filter((e) => e.Village.toLowerCase() === village)
@@ -173,7 +175,7 @@ function AppContent() {
     setResetSearch(true);
     setSelectVillage(village === "" ? "All" : village);
     // getWardData(input);
-    getWardData(input, selectVillage);
+    getWardData(input, village);
   };
   const ClearSearch = () => {
     // const vData =
