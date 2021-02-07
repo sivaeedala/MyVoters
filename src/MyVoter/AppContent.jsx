@@ -8,6 +8,7 @@ import WardFilter from "./WardFilter";
 import { useHistory, Link, withRouter } from "react-router-dom";
 import { connect, useSelector } from "react-redux";
 import { Select } from "antd";
+import "./style/voter.css";
 
 function AppContent() {
   const { Option } = Select;
@@ -32,6 +33,7 @@ function AppContent() {
     kGudem: 0,
     other: 0,
   });
+  const [casteSelect, setCasteSelect] = useState("");
 
   const getCasteCount = (data, input) => {
     return data.filter((e) => e.Caste === input).length;
@@ -188,7 +190,30 @@ function AppContent() {
     setResetAll(true);
     setSelectVillage(village === "" ? "All" : village);
     setSelectWard(ward);
+    setCasteSelect("");
   };
+
+  const handleCasteSelect = (selCaste) => {
+    const data = getVotersData(selectWard, selectVillage);
+    setCasteSelect(selCaste);
+
+    if (selCaste !== "other") {
+      const result = data.filter((e) => e.Caste === selCaste);
+      setFilterData(result);
+      //setCastNVillageCnt(result);
+    } else {
+      const result = data.filter(
+        (e) =>
+          e.Caste !== "OC" &&
+          e.Caste !== "BC" &&
+          e.Caste !== "SC-ML" &&
+          e.Caste !== "SC-MD"
+      );
+      setFilterData(result);
+      //setCastNVillageCnt(result);
+    }
+  };
+
   return (
     <div className="mycontent">
       {userName !== "" && ward !== "" ? (
@@ -244,7 +269,7 @@ function AppContent() {
           </div>
           <div className="row border">
             <div class="col">
-              <Badge variant="info">{`Gollagudem-${villageCount.gGudem}`}</Badge>
+              <Badge variant="warning">{`Gollagudem-${villageCount.gGudem}`}</Badge>
             </div>
             <div class="col">
               <Badge variant="success">{`Kothgudem-${villageCount.kGudem}`}</Badge>
@@ -254,20 +279,73 @@ function AppContent() {
             </div>
           </div>
           <div className="row border">
-            <div class="col">
-              <Badge variant="warning">{`OC-${casteCount.oc}`}</Badge>
+            <div
+              className="col"
+              //className={casteSelect === "OC" ? "col btn-select" : "col"}
+            >
+              <Button
+                variant="warning"
+                onClick={() => {
+                  handleCasteSelect("OC");
+                }}
+                size="sm"
+                className={casteSelect === "OC" ? "btn-caste" : ""}
+                // style={
+                //   casteSelect === "OC" ? { border: "2px solid black" } : ""
+                // }
+              >
+                <Badge variant="light">{`OC -${casteCount.oc}`}</Badge>
+              </Button>
             </div>
-            <div class="col">
-              <Badge variant="info">{`BC-${casteCount.bc}`}</Badge>
+            <div className="col">
+              <Button
+                variant="info"
+                onClick={() => {
+                  handleCasteSelect("BC");
+                }}
+                size="sm"
+                className={casteSelect === "BC" ? "btn-caste" : ""}
+              >
+                <Badge variant="light">{`BC-${casteCount.bc}`}</Badge>
+              </Button>
             </div>
-            <div class="col">
-              <Badge variant="primary">{`SC-ML-${casteCount.scMl}`}</Badge>
+            <div className="col">
+              <Button
+                variant="primary"
+                onClick={() => {
+                  handleCasteSelect("SC-ML");
+                }}
+                size="sm"
+                className={casteSelect === "SC-ML" ? "btn-caste" : ""}
+              >
+                <Badge variant="light">{`SC-ML-${casteCount.scMl}`}</Badge>
+              </Button>
             </div>
-            <div class="col">
-              <Badge variant="dark">{`SC-MD-${casteCount.scMd}`}</Badge>
+            <div className="col">
+              <Button
+                variant="dark"
+                onClick={() => {
+                  handleCasteSelect("SC-MD");
+                }}
+                size="sm"
+                className={casteSelect === "SC-MD" ? "btn-caste" : ""}
+              >
+                <Badge variant="light">{`SC-MD-${casteCount.scMd}`}</Badge>
+              </Button>
             </div>
-            <div class="col">
-              <Badge variant="secondary">{`NA-${casteCount.na}`}</Badge>
+          </div>
+          <div className="row">
+            <div className="col">
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  handleCasteSelect("other");
+                }}
+                size="sm"
+                className={casteSelect === "other" ? "btn-caste" : ""}
+              >
+                <Badge variant="light">{`NA-${casteCount.na}`}</Badge>
+              </Button>
             </div>
           </div>
           <div className="row">
