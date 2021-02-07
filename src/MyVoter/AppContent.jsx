@@ -146,6 +146,7 @@ function AppContent() {
     // setResetAll(true);
     setSelectWard(ward);
     setResetSearch(false);
+     setCasteSelect("");
     // const searchData =
     //   ward === "All" ? votersData : votersData.filter((e) => e.Ward === ward);
     // const searchData = getVotersData(ward, village);
@@ -164,6 +165,7 @@ function AppContent() {
   const handleVillageSelect = (value) => {
     setSelectVillage(value);
     getWardData(selectWard, value);
+     setCasteSelect("");
 
     // if (value === "All") {
     //   getWardData(selectWard, value);
@@ -178,6 +180,7 @@ function AppContent() {
     setSelectVillage(village === "" ? "All" : village);
     // getWardData(input);
     getWardData(input, village);
+     setCasteSelect("");
   };
   const ClearSearch = () => {
     // const vData =
