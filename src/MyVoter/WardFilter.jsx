@@ -18,11 +18,6 @@ export default function WardFilter({
     // alert(value);
   };
 
-  useEffect(() => {
-    if (reset) {
-      // setSelectWard(ward);
-    }
-  }, [reset]);
   return (
     <div>
       <Row className="align-items-center">
