@@ -10,7 +10,11 @@ export const users = [
     village: "gollagudem",
   },
   {
-    Name: "leader9399",
+    Name: "Leader678",
+    ward: "All",
+  },
+  {
+    Name: "Sudheer678",
     ward: "All",
   },
   {

@@ -11,7 +11,7 @@ function Login({ dispatch }) {
   const { loading } = useSelector((state) => state);
   const history = useHistory();
   const checkUser = (userName) => {
-    const userDtls = users.filter((e) => e.Name.toLowerCase() === userName);
+    const userDtls = users.filter((e) => e.Name === userName);
     if (userDtls.length > 0) {
       return {
         userName: userDtls[0].Name,
