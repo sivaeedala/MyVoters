@@ -14,7 +14,7 @@ export const users = [
     ward: "All",
   },
   {
-    Name: "Sudheer678",
+    Name: "Gollagudem",
     ward: "All",
   },
   {
