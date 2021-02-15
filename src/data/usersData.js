@@ -10,59 +10,59 @@ export const users = [
     village: "gollagudem",
   },
   {
-    Name: "Chiru7678",
+    Name: "CM7678",
     ward: "All",
   },
   {
-    Name: "Gollagudem",
+    Name: "Gollagudem.",
     ward: "All",
   },
   {
-    Name: "111",
+    Name: "S111",
     ward: "1",
   },
   {
-    Name: "222",
+    Name: "U222",
     ward: "2",
   },
   {
-    Name: "333",
+    Name: "D333",
     ward: "3",
   },
   {
-    Name: "444",
+    Name: "H444",
     ward: "4",
   },
   {
-    Name: "555",
+    Name: "E555",
     ward: "5",
   },
   {
-    Name: "666",
+    Name: "E666",
     ward: "6",
   },
   {
-    Name: "777",
+    Name: "R777",
     ward: "7",
   },
   {
-    Name: "888",
+    Name: "S888",
     ward: "8",
   },
   {
-    Name: "999",
+    Name: "U999",
     ward: "9",
   },
   {
-    Name: "1010",
+    Name: "D1010",
     ward: "10",
   },
   {
-    Name: "1111",
+    Name: "H1111",
     ward: "11",
   },
   {
-    Name: "1212",
+    Name: "E1212",
     ward: "12",
   },
 ];
