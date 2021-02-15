@@ -1,16 +1,16 @@
 export const users = [
   {
-    Name: "kg007",
+    Name: "kg777",
     ward: "All",
     village: "kothagudem",
   },
   {
-    Name: "gg009",
+    Name: "gg779",
     ward: "All",
     village: "gollagudem",
   },
   {
-    Name: "Leader678",
+    Name: "Chiru7678",
     ward: "All",
   },
   {
@@ -18,51 +18,51 @@ export const users = [
     ward: "All",
   },
   {
-    Name: "cd100",
+    Name: "111",
     ward: "1",
   },
   {
-    Name: "i20",
+    Name: "222",
     ward: "2",
   },
   {
-    Name: "tuv300",
+    Name: "333",
     ward: "3",
   },
   {
-    Name: "nano44",
+    Name: "444",
     ward: "4",
   },
   {
-    Name: "city55",
+    Name: "555",
     ward: "5",
   },
   {
-    Name: "amaze676",
+    Name: "666",
     ward: "6",
   },
   {
-    Name: "wrv777",
+    Name: "777",
     ward: "7",
   },
   {
-    Name: "nixon89",
+    Name: "888",
     ward: "8",
   },
   {
-    Name: "swift933",
+    Name: "999",
     ward: "9",
   },
   {
-    Name: "xuv1009",
+    Name: "1010",
     ward: "10",
   },
   {
-    Name: "scross1155",
+    Name: "1111",
     ward: "11",
   },
   {
-    Name: "aura1234",
+    Name: "1212",
     ward: "12",
   },
 ];
